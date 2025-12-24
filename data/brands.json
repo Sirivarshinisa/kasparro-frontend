@@ -1,0 +1,23 @@
+[
+  {
+    "id": "brand-1",
+    "name": "TechVista",
+    "domain": "techvista.com",
+    "industry": "Technology",
+    "lastAuditDate": "2025-12-20T10:30:00Z"
+  },
+  {
+    "id": "brand-2",
+    "name": "EcoFlow",
+    "domain": "ecoflow.io",
+    "industry": "Sustainability",
+    "lastAuditDate": "2025-12-18T14:20:00Z"
+  },
+  {
+    "id": "brand-3",
+    "name": "HealthCore",
+    "domain": "healthcore.com",
+    "industry": "Healthcare",
+    "lastAuditDate": "2025-12-22T09:15:00Z"
+  }
+]

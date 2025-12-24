@@ -1,0 +1,316 @@
+{
+  "brand-1": [
+    {
+      "id": "module-1",
+      "name": "Content Quality & Relevance",
+      "description": "Analyzes content alignment with AI search patterns and user intent signals",
+      "icon": "FileText",
+      "score": {
+        "value": 82,
+        "maxValue": 100,
+        "trend": "up",
+        "changePercentage": 8
+      },
+      "insights": [
+        {
+          "id": "ins-1",
+          "type": "positive",
+          "title": "Strong topical authority in cloud computing",
+          "description": "Your content demonstrates deep expertise in cloud infrastructure topics, which AI models consistently cite."
+        },
+        {
+          "id": "ins-2",
+          "type": "warning",
+          "title": "Thin coverage on emerging AI topics",
+          "description": "Limited content addressing AI/ML infrastructure, a growing search trend."
+        }
+      ],
+      "issues": [
+        {
+          "id": "iss-1",
+          "severity": "medium",
+          "title": "Outdated statistics in 15 articles",
+          "description": "Content references 2022-2023 data that AI models flag as potentially outdated.",
+          "impact": "Reduced trust signals in AI-generated responses"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec-1",
+          "priority": "high",
+          "title": "Update statistical references across key articles",
+          "description": "Refresh data points in top-performing articles to reflect 2024-2025 trends.",
+          "expectedImpact": "+12% trust score improvement",
+          "effort": "medium"
+        },
+        {
+          "id": "rec-2",
+          "priority": "medium",
+          "title": "Create AI infrastructure content pillar",
+          "description": "Develop 8-10 articles covering AI/ML ops, GPU infrastructure, and AI model deployment.",
+          "expectedImpact": "+18% keyword coverage in emerging topics",
+          "effort": "high"
+        }
+      ],
+      "lastUpdated": "2025-12-20T10:30:00Z"
+    },
+    {
+      "id": "module-2",
+      "name": "Entity & Knowledge Graph",
+      "description": "Evaluates brand entity recognition and knowledge graph positioning across AI models",
+      "icon": "Network",
+      "score": {
+        "value": 76,
+        "maxValue": 100,
+        "trend": "stable",
+        "changePercentage": 3
+      },
+      "insights": [
+        {
+          "id": "ins-3",
+          "type": "positive",
+          "title": "Consistent entity recognition across GPT-4 and Claude",
+          "description": "Brand name and key products are correctly identified 94% of the time."
+        },
+        {
+          "id": "ins-4",
+          "type": "critical",
+          "title": "Missing entity relationships for executive team",
+          "description": "AI models lack structured data about company leadership."
+        }
+      ],
+      "issues": [
+        {
+          "id": "iss-2",
+          "severity": "high",
+          "title": "Competitor confusion in knowledge graphs",
+          "description": "TechVista is sometimes conflated with TechView in AI model responses.",
+          "impact": "Brand dilution in 18% of competitive queries"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec-3",
+          "priority": "high",
+          "title": "Implement structured data for leadership",
+          "description": "Add schema.org Person markup for C-suite and key team members.",
+          "expectedImpact": "+22% entity completeness score",
+          "effort": "low"
+        }
+      ],
+      "lastUpdated": "2025-12-20T10:30:00Z"
+    },
+    {
+      "id": "module-3",
+      "name": "E-E-A-T Signals",
+      "description": "Measures Experience, Expertise, Authoritativeness, and Trustworthiness indicators",
+      "icon": "Award",
+      "score": {
+        "value": 88,
+        "maxValue": 100,
+        "trend": "up",
+        "changePercentage": 5
+      },
+      "insights": [
+        {
+          "id": "ins-5",
+          "type": "positive",
+          "title": "Strong author credentials",
+          "description": "85% of content is authored by verified domain experts with public profiles."
+        }
+      ],
+      "issues": [
+        {
+          "id": "iss-3",
+          "severity": "low",
+          "title": "Limited third-party validation",
+          "description": "Few external sources cite TechVista content in authoritative contexts.",
+          "impact": "Moderate trust ceiling in AI model training data"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec-4",
+          "priority": "medium",
+          "title": "Launch thought leadership PR campaign",
+          "description": "Target placement in industry publications to build citation footprint.",
+          "expectedImpact": "+10% authoritativeness score",
+          "effort": "high"
+        }
+      ],
+      "lastUpdated": "2025-12-20T10:30:00Z"
+    },
+    {
+      "id": "module-4",
+      "name": "Semantic Search Alignment",
+      "description": "Analyzes content optimization for natural language queries and AI search patterns",
+      "icon": "Search",
+      "score": {
+        "value": 71,
+        "maxValue": 100,
+        "trend": "up",
+        "changePercentage": 14
+      },
+      "insights": [
+        {
+          "id": "ins-6",
+          "type": "warning",
+          "title": "Keyword-stuffing patterns detected",
+          "description": "12 articles show unnatural keyword density that AI models may penalize."
+        }
+      ],
+      "issues": [
+        {
+          "id": "iss-4",
+          "severity": "medium",
+          "title": "Poor answer-box optimization",
+          "description": "Content structure doesn't align with Q&A patterns AI models prefer.",
+          "impact": "Low feature snippet inclusion rate (8%)"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec-5",
+          "priority": "high",
+          "title": "Restructure top 20 articles for Q&A format",
+          "description": "Add clear question-answer sections optimized for AI extraction.",
+          "expectedImpact": "+35% featured snippet appearance",
+          "effort": "medium"
+        }
+      ],
+      "lastUpdated": "2025-12-20T10:30:00Z"
+    },
+    {
+      "id": "module-5",
+      "name": "Citation & Source Quality",
+      "description": "Evaluates external references, link quality, and source trustworthiness",
+      "icon": "Link",
+      "score": {
+        "value": 79,
+        "maxValue": 100,
+        "trend": "stable",
+        "changePercentage": 1
+      },
+      "insights": [
+        {
+          "id": "ins-7",
+          "type": "positive",
+          "title": "High-quality academic citations",
+          "description": "68% of external links point to peer-reviewed or authoritative sources."
+        },
+        {
+          "id": "ins-8",
+          "type": "warning",
+          "title": "Broken links affecting trust",
+          "description": "47 broken external links detected across content corpus."
+        }
+      ],
+      "issues": [
+        {
+          "id": "iss-5",
+          "severity": "medium",
+          "title": "Outdated source material",
+          "description": "Many citations reference pre-2023 sources in rapidly evolving topics.",
+          "impact": "Content may be deprioritized in AI model rankings"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec-6",
+          "priority": "high",
+          "title": "Audit and replace broken links",
+          "description": "Fix or replace all 47 broken citations within 2 weeks.",
+          "expectedImpact": "+8% trust score",
+          "effort": "low"
+        }
+      ],
+      "lastUpdated": "2025-12-20T10:30:00Z"
+    },
+    {
+      "id": "module-6",
+      "name": "Non-Branded Visibility",
+      "description": "Tracks brand appearance in AI responses for non-branded, intent-driven queries",
+      "icon": "TrendingUp",
+      "score": {
+        "value": 64,
+        "maxValue": 100,
+        "trend": "up",
+        "changePercentage": 18
+      },
+      "insights": [
+        {
+          "id": "ins-9",
+          "type": "warning",
+          "title": "Low inclusion in comparison queries",
+          "description": "TechVista rarely appears in 'best cloud providers' or similar queries."
+        }
+      ],
+      "issues": [
+        {
+          "id": "iss-6",
+          "severity": "high",
+          "title": "Missing from AI model training data",
+          "description": "Limited indexed content in AI model knowledge cutoffs.",
+          "impact": "Brand omitted from 73% of relevant non-branded queries"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec-7",
+          "priority": "high",
+          "title": "Increase content distribution to indexed sources",
+          "description": "Publish guest posts on high-authority sites likely in AI training data.",
+          "expectedImpact": "+28% non-branded visibility",
+          "effort": "high"
+        }
+      ],
+      "lastUpdated": "2025-12-20T10:30:00Z"
+    },
+    {
+      "id": "module-7",
+      "name": "Competitive Positioning",
+      "description": "Benchmarks brand against competitors in AI-generated responses and rankings",
+      "icon": "Target",
+      "score": {
+        "value": 72,
+        "maxValue": 100,
+        "trend": "up",
+        "changePercentage": 9
+      },
+      "insights": [
+        {
+          "id": "ins-10",
+          "type": "positive",
+          "title": "Outperforming direct competitors in technical depth",
+          "description": "TechVista content is cited more frequently than top 3 competitors in technical queries."
+        },
+        {
+          "id": "ins-11",
+          "type": "warning",
+          "title": "Lower mention rate in general queries",
+          "description": "Larger competitors dominate brand awareness queries."
+        }
+      ],
+      "issues": [
+        {
+          "id": "iss-7",
+          "severity": "medium",
+          "title": "Competitive gaps in solution comparison content",
+          "description": "Competitors have stronger presence in AI-powered comparison tables.",
+          "impact": "Missing from 62% of competitive evaluation queries"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec-8",
+          "priority": "medium",
+          "title": "Create transparent comparison content",
+          "description": "Develop objective TechVista vs. Competitor guides that AI models trust.",
+          "expectedImpact": "+15% competitive query inclusion",
+          "effort": "medium"
+        }
+      ],
+      "lastUpdated": "2025-12-20T10:30:00Z"
+    }
+  ]
+}

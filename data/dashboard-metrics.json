@@ -1,0 +1,65 @@
+{
+  "brand-1": {
+    "aiVisibilityScore": {
+      "value": 78,
+      "maxValue": 100,
+      "trend": "up",
+      "changePercentage": 12
+    },
+    "trustScore": {
+      "value": 85,
+      "maxValue": 100,
+      "trend": "stable",
+      "changePercentage": 2
+    },
+    "keywordCoverage": {
+      "value": 64,
+      "maxValue": 100,
+      "trend": "up",
+      "changePercentage": 18
+    },
+    "lastAuditTimestamp": "2025-12-20T10:30:00Z"
+  },
+  "brand-2": {
+    "aiVisibilityScore": {
+      "value": 92,
+      "maxValue": 100,
+      "trend": "up",
+      "changePercentage": 8
+    },
+    "trustScore": {
+      "value": 88,
+      "maxValue": 100,
+      "trend": "up",
+      "changePercentage": 5
+    },
+    "keywordCoverage": {
+      "value": 71,
+      "maxValue": 100,
+      "trend": "down",
+      "changePercentage": -3
+    },
+    "lastAuditTimestamp": "2025-12-18T14:20:00Z"
+  },
+  "brand-3": {
+    "aiVisibilityScore": {
+      "value": 68,
+      "maxValue": 100,
+      "trend": "stable",
+      "changePercentage": 1
+    },
+    "trustScore": {
+      "value": 76,
+      "maxValue": 100,
+      "trend": "down",
+      "changePercentage": -4
+    },
+    "keywordCoverage": {
+      "value": 55,
+      "maxValue": 100,
+      "trend": "up",
+      "changePercentage": 15
+    },
+    "lastAuditTimestamp": "2025-12-22T09:15:00Z"
+  }
+}
