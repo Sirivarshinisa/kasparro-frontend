@@ -63,9 +63,15 @@ export function ModulesOverview() {
             const Icon = module.icon;
             return (
               <Card key={module.name} className="p-6 hover:shadow-lg transition-shadow">
-                <Icon className="h-8 w-8 mb-4 text-primary" />
-                <h3 className="font-semibold mb-2">{module.name}</h3>
-                <p className="text-sm text-muted-foreground">{module.description}</p>
+                <div className="flex items-start gap-4">
+                  <div className="p-2 bg-primary/10 rounded-lg flex-shrink-0">
+                    <Icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2">{module.name}</h3>
+                    <p className="text-sm text-muted-foreground">{module.description}</p>
+                  </div>
+                </div>
               </Card>
             );
           })}

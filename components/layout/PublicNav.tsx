@@ -9,9 +9,9 @@ export function PublicNav() {
   
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/platform', label: 'Platform' },
+    { href: '/platform', label: 'How It Works' },
     { href: '/about', label: 'About' },
-    { href: '/app/dashboard', label: 'Dashboard' },
+    { href: '/app/dashboard', label: 'Product Dashboard' },
   ];
 
   return (
