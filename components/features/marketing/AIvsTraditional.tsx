@@ -72,7 +72,7 @@ export function AIvsTraditional() {
                   </h3>
                   
                   {/* Traditional approach */}
-                  <div className="mb-6 p-4 rounded-lg bg-background/60 backdrop-blur-sm border border-muted hover:border-red-500/30 transition-colors duration-300 group">
+                  <div className="mb-6 p-4 rounded-lg bg-background/60 backdrop-blur-sm border border-muted">
                     <div className="flex items-start gap-3 mb-2">
                       <div className="p-1.5 bg-red-500/10 rounded-full mt-0.5">
                         <X className="h-4 w-4 text-red-600" />
@@ -85,7 +85,7 @@ export function AIvsTraditional() {
                   </div>
                   
                   {/* AI-First approach */}
-                  <div className="p-4 rounded-lg bg-primary/5 backdrop-blur-sm border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                  <div className="p-4 rounded-lg bg-primary/5 backdrop-blur-sm border-2 border-primary/20">
                     <div className="flex items-start gap-3">
                       <div className="p-1.5 bg-primary/20 rounded-full mt-0.5">
                         <Check className="h-4 w-4 text-primary" />
@@ -103,8 +103,8 @@ export function AIvsTraditional() {
         </div>
         
         {/* Bottom CTA highlight */}
-        <div className="text-center animate-in fade-in slide-in-from-bottom-3 duration-700 delay-700">
-          <Card className="inline-block p-6 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 border-primary/30 hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
+        <div className="text-center">
+          <Card className="inline-block p-6 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 border-primary/30 hover:border-primary/50 transition-colors hover:shadow-lg">
             <p className="text-sm font-semibold text-primary mb-2">The Bottom Line</p>
             <p className="text-lg font-medium max-w-2xl">
               Kasparro analyzes what AI models actually see, understand, and trust about your brand

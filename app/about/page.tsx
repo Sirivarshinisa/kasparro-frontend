@@ -78,6 +78,51 @@ export default function AboutPage() {
             </p>
           </Card>
 
+          {/* Technical Foundation */}
+          <Card className="p-8 mb-8">
+            <h2 className="text-2xl font-bold mb-4">Technical Foundation</h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-semibold mb-2">AI Model Understanding</h3>
+                <p className="text-sm text-muted-foreground mb-2">
+                  Kasparro analyzes how Large Language Models (LLMs) process and prioritize information 
+                  during response generation. We study attention mechanisms, retrieval-augmented generation 
+                  (RAG) patterns, and citation preferences across ChatGPT, Claude, Perplexity, and emerging AI systems.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Our analysis engine reverse-engineers the signals that influence AI model confidence scores, 
+                  source selection, and factual grounding—going beyond traditional PageRank-style metrics to 
+                  evaluate semantic relevance, entity salience, and trustworthiness indicators.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Natural Language Processing Pipeline</h3>
+                <p className="text-sm text-muted-foreground">
+                  We employ state-of-the-art NLP techniques including named entity recognition (NER), 
+                  relation extraction, semantic similarity models, and sentiment analysis to understand how 
+                  brand content is structured, linked, and potentially interpreted by AI systems.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Entity Knowledge Graphs</h3>
+                <p className="text-sm text-muted-foreground">
+                  Every audit builds a custom knowledge graph mapping relationships between your brand, 
+                  products, competitors, industry concepts, and authoritative sources. This graph mirrors 
+                  how AI models construct internal representations and helps identify gaps in entity coverage 
+                  and relationship clarity.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Real-Time AI Search Monitoring</h3>
+                <p className="text-sm text-muted-foreground">
+                  We continuously query AI search engines with relevant prompts, analyzing response patterns, 
+                  citation frequencies, competitive positioning, and content attribution. This provides 
+                  empirical data about how AI models actually behave, not just theoretical optimization guidelines.
+                </p>
+              </div>
+            </div>
+          </Card>
+
           {/* Founder Note */}
           <div className="mt-12 pt-8 border-t">
             <p className="text-sm text-muted-foreground italic">

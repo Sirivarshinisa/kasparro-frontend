@@ -49,12 +49,12 @@ const modules = [
 
 export function ModulesOverview() {
   return (
-    <section className="py-20 px-4 bg-muted/10 animate-in fade-in duration-700">
-      <div className="container mx-auto max-w-[1600px]">
-        <h2 className="text-3xl font-bold text-center mb-4 animate-in fade-in slide-in-from-bottom-3 duration-700">
+    <section className="py-20 px-4 bg-muted/10">
+      <div className="container mx-auto max-w-7xl">
+        <h2 className="text-3xl font-bold text-center mb-4">
           7 Core Audit Modules
         </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-3 duration-700 delay-150">
+        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
           Kasparro analyzes your brand through seven critical dimensions that determine 
           AI visibility and trustworthiness.
         </p>
@@ -64,11 +64,10 @@ export function ModulesOverview() {
             return (
               <Card 
                 key={module.name} 
-                className="p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] animate-in fade-in slide-in-from-bottom-4 duration-500"
-                style={{ animationDelay: `${300 + index * 100}ms` }}
+                className="p-6 hover:shadow-lg transition-shadow"
               >
                 <div className="flex items-start gap-4">
-                  <div className="p-2 bg-primary/10 rounded-lg flex-shrink-0 transition-transform duration-200 hover:scale-110">
+                  <div className="p-2 bg-primary/10 rounded-lg flex-shrink-0">
                     <Icon className="h-6 w-6 text-primary" />
                   </div>
                   <div>

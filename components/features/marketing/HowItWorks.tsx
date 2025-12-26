@@ -50,8 +50,8 @@ export function HowItWorks() {
                 </div>
               </Card>
               {index < steps.length - 1 && (
-                <div className="hidden md:flex items-center justify-center px-6 animate-in fade-in duration-500" style={{ animationDelay: `${450 + index * 150}ms` }}>
-                  <ArrowRight className="text-primary h-8 w-8 flex-shrink-0 animate-pulse" strokeWidth={2.5} />
+                <div className="hidden md:flex items-center justify-center px-6">
+                  <ArrowRight className="text-primary h-8 w-8 flex-shrink-0" strokeWidth={2.5} />
                 </div>
               )}
             </div>

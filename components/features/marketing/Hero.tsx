@@ -27,7 +27,7 @@ export function Hero() {
             <Link href="/platform">Learn More</Link>
           </Button>
         </div>
-        <p className="text-sm text-muted-foreground mt-4 animate-in fade-in duration-700 delay-700">
+        <p className="text-sm text-muted-foreground mt-4">
           Demo audit using mocked data — real insights coming soon.
         </p>
       </div>

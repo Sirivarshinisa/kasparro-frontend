@@ -7,6 +7,7 @@ import { ModuleSidebar, ModuleDetailPanel } from '@/components/features/audit/Au
 import { useAppStore } from '@/lib/store';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import { HelpCircle } from 'lucide-react';
+import { getModuleIds } from '@/lib/config/audit-modules';
 
 interface AuditModuleData {
   id: string;
@@ -23,24 +24,16 @@ interface AuditModuleData {
   recommendations: string[];
 }
 
-const moduleIds = [
-  'brand-visibility',
-  'trust-authority',
-  'content-representation',
-  'keyword-coverage',
-  'sentiment-positioning',
-  'source-diversity',
-  'competitive-context'
-];
-
 export default function AuditPage() {
   const { selectedBrand, selectedModuleId, setSelectedModuleId } = useAppStore();
   const [modules, setModules] = useState<AuditModuleData[]>([]);
   const [loading, setLoading] = useState(true);
+  const moduleCount = getModuleIds().length;
 
   useEffect(() => {
     if (selectedBrand) {
       setLoading(true);
+      const moduleIds = getModuleIds();
       Promise.all(
         moduleIds.map(id => 
           fetch(`/data/audit-modules/${id}.json`)
@@ -80,7 +73,7 @@ export default function AuditPage() {
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <p className="text-muted-foreground">Deep analysis across 7 core modules</p>
+              <p className="text-muted-foreground">Deep analysis across {moduleCount} core modules</p>
             </div>
             <BrandSelector />
           </div>

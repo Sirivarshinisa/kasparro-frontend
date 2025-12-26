@@ -105,19 +105,27 @@ export default function ArchitecturePage() {
                 <div className="flex items-center gap-4">
                   <div className="w-32 text-sm font-medium">Normalization</div>
                   <div className="flex-1 text-sm text-muted-foreground bg-muted p-3 rounded">
-                    Convert raw data into standardized formats for module consumption
+                    Convert raw HTML, PDF, and structured data into standardized JSON schemas. 
+                    Extract clean text, remove boilerplate, preserve semantic structure (headings, lists, tables). 
+                    Apply content deduplication and canonical URL resolution.
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="w-32 text-sm font-medium">Enrichment</div>
                   <div className="flex-1 text-sm text-muted-foreground bg-muted p-3 rounded">
-                    Add semantic annotations, entity linking, and contextual metadata
+                    Run NER models to identify entities (people, orgs, products, locations). 
+                    Apply semantic embeddings (sentence transformers) for similarity analysis. 
+                    Link entities to knowledge bases (DBpedia, Wikidata) and build brand-specific entity graph. 
+                    Extract metadata: authorship, publish dates, update frequency, schema.org annotations.
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="w-32 text-sm font-medium">Indexing</div>
                   <div className="flex-1 text-sm text-muted-foreground bg-muted p-3 rounded">
-                    Structure data for efficient parallel processing across modules
+                    Create inverted indices for keyword lookup, vector indices for semantic search, 
+                    and graph databases for relationship traversal. Partition data by content type, 
+                    recency, and domain authority for optimized module access. Generate content fingerprints 
+                    for change detection and incremental updates.
                   </div>
                 </div>
               </div>
@@ -239,6 +247,53 @@ export default function ArchitecturePage() {
               <div>
                 <strong>AI-Native Design:</strong> Every component is optimized for analyzing how AI 
                 models consume and trust information, not traditional search engine algorithms.
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Technical Implementation Details */}
+        <Card className="border-primary/20">
+          <CardHeader>
+            <CardTitle className="text-lg">Technical Implementation</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-6 text-sm">
+              <div>
+                <h4 className="font-semibold mb-2">Machine Learning Stack</h4>
+                <ul className="space-y-1 text-muted-foreground">
+                  <li>• <strong>Embeddings:</strong> Sentence transformers for semantic similarity (all-MiniLM-L6-v2, mpnet-base)</li>
+                  <li>• <strong>NER:</strong> spaCy and fine-tuned BERT models for entity extraction</li>
+                  <li>• <strong>Sentiment:</strong> Transformer-based models for nuanced tone analysis</li>
+                  <li>• <strong>Classification:</strong> Custom models trained on AI search result patterns</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-2">Data Infrastructure</h4>
+                <ul className="space-y-1 text-muted-foreground">
+                  <li>• <strong>Graph DB:</strong> Neo4j for entity relationship mapping</li>
+                  <li>• <strong>Vector Store:</strong> Pinecone/Weaviate for semantic search</li>
+                  <li>• <strong>Time-series:</strong> InfluxDB for tracking metric evolution</li>
+                  <li>• <strong>Cache:</strong> Redis for real-time performance</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-2">Processing Pipeline</h4>
+                <ul className="space-y-1 text-muted-foreground">
+                  <li>• <strong>Queue:</strong> RabbitMQ for distributed task processing</li>
+                  <li>• <strong>Workers:</strong> Celery for parallel module execution</li>
+                  <li>• <strong>Scheduling:</strong> Apache Airflow for orchestration</li>
+                  <li>• <strong>Monitoring:</strong> Prometheus + Grafana for pipeline health</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-2">AI Search Integration</h4>
+                <ul className="space-y-1 text-muted-foreground">
+                  <li>• <strong>APIs:</strong> Direct integration with Perplexity, You.com APIs</li>
+                  <li>• <strong>Simulation:</strong> Local LLM inference for testing (Llama, Mistral)</li>
+                  <li>• <strong>Pattern Analysis:</strong> Custom parsers for citation extraction</li>
+                  <li>• <strong>Continuous Monitoring:</strong> Automated query execution + diff tracking</li>
+                </ul>
               </div>
             </div>
           </CardContent>
