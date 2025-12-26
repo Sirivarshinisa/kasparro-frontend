@@ -43,10 +43,6 @@ export function Hero() {
               <div className="text-3xl font-bold">7</div>
               <div className="text-sm text-muted-foreground">Audit modules</div>
             </div>
-            <div className="p-6 rounded-lg border bg-card space-y-2">
-              <div className="text-3xl font-bold">AI-Native</div>
-              <div className="text-sm text-muted-foreground">Not retrofitted SEO</div>
-            </div>
           </div>
         </div>
       </div>
