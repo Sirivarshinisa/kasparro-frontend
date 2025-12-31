@@ -7,62 +7,43 @@ import { ModuleSidebar, ModuleDetailPanel } from '@/components/features/audit/Au
 import { useAppStore } from '@/lib/store';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import { HelpCircle } from 'lucide-react';
-import { getModuleIds } from '@/lib/config/audit-modules';
-
-interface AuditModuleData {
-  id: string;
-  name: string;
-  score: number;
-  scoreLabel: string;
-  summary: string;
-  insights: string[];
-  issues: Array<{
-    severity: string;
-    title: string;
-    description: string;
-  }>;
-  recommendations: string[];
-}
+import { fetchAuditModules } from '@/lib/services/data-service';
+import { LoadingSpinner, ErrorMessage, EmptyState } from '@/components/ui/loading-states';
+import type { AuditModule } from '@/lib/types';
 
 export default function AuditPage() {
   const { selectedBrand, selectedModuleId, setSelectedModuleId } = useAppStore();
-  const [modules, setModules] = useState<AuditModuleData[]>([]);
+  const [modules, setModules] = useState<AuditModule[]>([]);
   const [loading, setLoading] = useState(true);
-  const moduleCount = getModuleIds().length;
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (selectedBrand) {
-      setLoading(true);
-      
-      // Dynamically discover and load available modules
-      fetch('/data/audit-modules/')
-        .then(res => {
-          // If directory listing is available, use it
-          // Otherwise, fall back to attempting known module IDs
-          return getModuleIds();
-        })
-        .then(moduleIds => {
-          return Promise.all(
-            moduleIds.map(id => 
-              fetch(`/data/audit-modules/${id}.json`)
-                .then(res => res.ok ? res.json() : null)
-                .catch(() => null)
-            )
-          );
-        })
-        .then(results => {
-          const validModules = results.filter(Boolean) as AuditModuleData[];
-          setModules(validModules);
-          if (validModules.length > 0 && !selectedModuleId) {
-            setSelectedModuleId(validModules[0].id);
-          }
-          setLoading(false);
-        })
-        .catch(() => {
-          setLoading(false);
-        });
+      loadModules();
     }
-  }, [selectedBrand, selectedModuleId, setSelectedModuleId]);
+  }, [selectedBrand?.id]);
+
+  const loadModules = async () => {
+    if (!selectedBrand) return;
+    
+    setLoading(true);
+    setError(null);
+    
+    const result = await fetchAuditModules(selectedBrand.id);
+    
+    if (result.error || !result.data) {
+      setError(result.error || 'Failed to load audit modules');
+      setModules([]);
+    } else {
+      setModules(result.data);
+      // Auto-select first module if none selected
+      if (result.data.length > 0 && !selectedModuleId) {
+        setSelectedModuleId(result.data[0].id);
+      }
+    }
+    
+    setLoading(false);
+  };
 
   const selectedModule = modules.find((m) => m.id === selectedModuleId);
 
@@ -86,23 +67,33 @@ export default function AuditPage() {
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <p className="text-muted-foreground">Deep analysis across {moduleCount} core modules</p>
+              <p className="text-muted-foreground">
+                {modules.length > 0 ? `Deep analysis across ${modules.length} core modules` : 'Comprehensive AI-SEO audit'}
+              </p>
             </div>
             <BrandSelector />
           </div>
 
         {!selectedBrand ? (
-          <div className="text-center py-12 text-muted-foreground">
-            Select a brand to view audit
+          <div className="py-12">
+            <EmptyState message="Select a brand to view audit" />
           </div>
         ) : loading ? (
-          <div className="text-center py-12 text-muted-foreground">
-            Loading audit data...
+          <div className="py-12">
+            <LoadingSpinner message="Loading audit data..." />
           </div>
-        ) : modules.length > 0 ? (
-          <div className="flex -mx-8 rounded-lg overflow-hidden border shadow-lg bg-background" style={{ height: 'calc(100vh - 220px)' }}>
-            <ModuleSidebar 
-              modules={modules} 
+        ) : error ? (
+          <div className="py-12">
+            <ErrorMessage message={error} retry={loadModules} />
+          </div>
+        ) : modules.length === 0 ? (
+          <div className="py-12">
+            <EmptyState message="No audit modules available for this brand" />
+          </div>
+        ) : (
+          <div className="flex rounded-lg border bg-card overflow-hidden shadow-lg" style={{ height: '70vh' }}>
+            <ModuleSidebar
+              modules={modules}
               selectedModuleId={selectedModuleId}
               onSelectModule={setSelectedModuleId}
             />
@@ -119,10 +110,6 @@ export default function AuditPage() {
                 </div>
               </div>
             )}
-          </div>
-        ) : (
-          <div className="text-center py-12 text-muted-foreground">
-            No audit data available
           </div>
         )}
         </div>

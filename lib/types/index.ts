@@ -8,23 +8,36 @@ export interface Brand {
   lastAuditDate: string;
 }
 
+export type TrendType = 'up' | 'down' | 'stable';
+export type SeverityLevel = 'high' | 'medium' | 'low' | 'critical';
+export type PriorityLevel = 'high' | 'medium' | 'low';
+export type EffortLevel = 'low' | 'medium' | 'high';
+export type InsightType = 'positive' | 'warning' | 'critical';
+
 export interface Score {
   value: number;
   maxValue: number;
-  trend?: 'up' | 'down' | 'stable';
+  trend?: TrendType;
   changePercentage?: number;
 }
 
 export interface Insight {
   id: string;
-  type: 'positive' | 'warning' | 'critical';
+  type: InsightType;
+  title: string;
+  description: string;
+}
+
+export interface Insight {
+  id: string;
+  type: InsightType;
   title: string;
   description: string;
 }
 
 export interface Issue {
   id: string;
-  severity: 'high' | 'medium' | 'low';
+  severity: string;
   title: string;
   description: string;
   impact: string;
@@ -32,23 +45,24 @@ export interface Issue {
 
 export interface Recommendation {
   id: string;
-  priority: 'high' | 'medium' | 'low';
+  priority: string;
   title: string;
   description: string;
   expectedImpact: string;
-  effort: 'low' | 'medium' | 'high';
+  effort: string;
 }
 
 export interface AuditModule {
   id: string;
   name: string;
-  description: string;
-  icon: string;
+  description?: string;
+  icon?: string;
   score: Score;
+  scoreLabel: string;
+  summary: string;
   insights: Insight[];
   issues: Issue[];
   recommendations: Recommendation[];
-  lastUpdated: string;
 }
 
 export interface DashboardMetrics {
@@ -64,3 +78,19 @@ export interface AuditData {
   metrics: DashboardMetrics;
   generatedAt: string;
 }
+
+// API Response types for error handling
+export interface DataResult<T> {
+  data: T | null;
+  error: string | null;
+  isLoading: boolean;
+}
+
+// Brand data structure from JSON
+export type BrandList = Brand[];
+
+// Audit modules data structure from JSON  
+export type AuditModulesData = Record<string, AuditModule[]>;
+
+// Dashboard metrics data structure from JSON
+export type DashboardMetricsData = Record<string, DashboardMetrics>;

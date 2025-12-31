@@ -10,24 +10,68 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useAppStore } from '@/lib/store';
-import { Brand, DashboardMetrics } from '@/lib/types';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { 
+  LoadingSkeleton, 
+  LoadingSpinner, 
+  ErrorMessage, 
+  EmptyState 
+} from '@/components/ui/loading-states';
+import { 
+  fetchBrands, 
+  fetchDashboardMetrics 
+} from '@/lib/services/data-service';
+import type { Brand, DashboardMetrics, Score } from '@/lib/types';
 
+/**
+ * Brand Selector Component with error handling
+ */
 export function BrandSelector() {
   const [brands, setBrands] = useState<Brand[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const { selectedBrand, setSelectedBrand } = useAppStore();
 
   useEffect(() => {
-    fetch('/data/brands.json')
-      .then((res) => res.json())
-      .then((data) => {
-        setBrands(data);
-        if (data.length > 0 && !selectedBrand) {
-          setSelectedBrand(data[0]);
-        }
-      });
-  }, [selectedBrand, setSelectedBrand]);
+    loadBrands();
+  }, []);
+
+  const loadBrands = async () => {
+    setIsLoading(true);
+    setError(null);
+    
+    const result = await fetchBrands();
+    
+    if (result.error || !result.data) {
+      setError(result.error || 'Failed to load brands');
+      setIsLoading(false);
+      return;
+    }
+    
+    setBrands(result.data);
+    
+    // Auto-select first brand if none selected
+    if (result.data.length > 0 && !selectedBrand) {
+      setSelectedBrand(result.data[0]);
+    }
+    
+    setIsLoading(false);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="w-64 h-10 bg-muted animate-pulse rounded-md"></div>
+    );
+  }
+
+  if (error || brands.length === 0) {
+    return (
+      <div className="text-sm text-destructive">
+        Unable to load brands
+      </div>
+    );
+  }
 
   return (
     <Select
@@ -51,39 +95,51 @@ export function BrandSelector() {
   );
 }
 
+/**
+ * Get score badge configuration
+ */
+function getScoreBadge(value: number): { label: string; color: string } {
+  if (value >= 80) return { label: 'Excellent', color: 'bg-green-600' };
+  if (value >= 65) return { label: 'Good', color: 'bg-blue-600' };
+  if (value >= 50) return { label: 'Fair', color: 'bg-orange-600' };
+  return { label: 'Needs Work', color: 'bg-red-600' };
+}
+
+/**
+ * Get trend icon and color
+ */
+function getTrendDisplay(trend?: string) {
+  const TrendIcon = 
+    trend === 'up' ? TrendingUp :
+    trend === 'down' ? TrendingDown :
+    Minus;
+  
+  const trendColor = 
+    trend === 'up' ? 'text-green-600' :
+    trend === 'down' ? 'text-red-600' :
+    'text-muted-foreground';
+
+  return { TrendIcon, trendColor };
+}
+
+/**
+ * Snapshot Card Component - fully data-driven
+ */
 export function SnapshotCard({ 
   title, 
   value,
   change,
-  description 
+  description,
+  trend
 }: { 
   title: string; 
   value: number;
   change: string;
   description: string;
+  trend?: string;
 }) {
-  const percentage = value;
-  const isPositive = change.startsWith('+');
-  const isNegative = change.startsWith('-');
-  
-  const TrendIcon = 
-    isPositive ? TrendingUp :
-    isNegative ? TrendingDown :
-    Minus;
-  
-  const trendColor = 
-    isPositive ? 'text-green-600' :
-    isNegative ? 'text-red-600' :
-    'text-muted-foreground';
-
-  const getScoreBadge = () => {
-    if (value >= 80) return { label: 'Excellent', color: 'bg-green-600' };
-    if (value >= 65) return { label: 'Good', color: 'bg-blue-600' };
-    if (value >= 50) return { label: 'Fair', color: 'bg-orange-600' };
-    return { label: 'Needs Work', color: 'bg-red-600' };
-  };
-
-  const scoreBadge = getScoreBadge();
+  const scoreBadge = getScoreBadge(value);
+  const { TrendIcon, trendColor } = getTrendDisplay(trend);
 
   return (
     <Card className="hover:shadow-md transition-shadow">
@@ -99,78 +155,89 @@ export function SnapshotCard({
           <div className="text-4xl font-bold">{value}</div>
           <div className="text-sm text-muted-foreground">/ 100</div>
         </div>
-        <div className="flex items-center gap-3 mt-3">
-          <div className="flex-1 bg-muted rounded-full h-2.5">
-            <div 
-              className={`h-2.5 rounded-full transition-all ${
-                value >= 80 ? 'bg-green-600' :
-                value >= 65 ? 'bg-blue-600' :
-                value >= 50 ? 'bg-orange-600' :
-                'bg-red-600'
-              }`}
-              style={{ width: `${percentage}%` }}
-            />
-          </div>
-          <div className={`flex items-center gap-1 text-sm font-semibold ${trendColor}`}>
-            <TrendIcon className="h-4 w-4" />
-            {change}
-          </div>
+        <div className={`flex items-center gap-1 text-sm font-medium ${trendColor}`}>
+          <TrendIcon className="h-4 w-4" />
+          <span>{change}</span>
         </div>
       </CardContent>
     </Card>
   );
 }
 
+/**
+ * Dashboard Metrics Display - fully data-driven with error handling
+ */
 export function DashboardMetricsDisplay({ brandId }: { brandId: string }) {
-  const [metrics, setMetrics] = useState<any>(null);
+  const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/data/dashboard-metrics.json')
-      .then((res) => res.json())
-      .then((data) => {
-        setMetrics(data[brandId]);
-      });
+    loadMetrics();
   }, [brandId]);
 
-  if (!metrics) {
-    return <div>Loading metrics...</div>;
+  const loadMetrics = async () => {
+    setIsLoading(true);
+    setError(null);
+    
+    const result = await fetchDashboardMetrics(brandId);
+    
+    if (result.error || !result.data) {
+      setError(result.error || 'Failed to load metrics');
+      setMetrics(null);
+    } else {
+      setMetrics(result.data);
+    }
+    
+    setIsLoading(false);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <LoadingSkeleton count={3} />
+      </div>
+    );
   }
 
+  if (error || !metrics) {
+    return <ErrorMessage message={error || undefined} retry={loadMetrics} />;
+  }
+
+  // Helper to format score data
+  const formatScore = (score: Score) => {
+    const changeSign = (score.changePercentage ?? 0) >= 0 ? '+' : '';
+    const changeText = `${changeSign}${score.changePercentage ?? 0}%`;
+    return { changeText, trend: score.trend };
+  };
+
+  const aiVisibility = formatScore(metrics.aiVisibilityScore);
+  const trust = formatScore(metrics.trustScore);
+  const keyword = formatScore(metrics.keywordCoverage);
+
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
       <SnapshotCard
         title="AI Visibility Score"
         value={metrics.aiVisibilityScore.value}
-        change={`${metrics.aiVisibilityScore.changePercentage > 0 ? '+' : ''}${metrics.aiVisibilityScore.changePercentage}%`}
-        description="How often your brand appears in AI responses"
+        change={aiVisibility.changeText}
+        description="How often AI models cite your brand"
+        trend={aiVisibility.trend}
       />
       <SnapshotCard
-        title="Trust / E-E-A-T Score"
+        title="Trust & Authority"
         value={metrics.trustScore.value}
-        change={`${metrics.trustScore.changePercentage > 0 ? '+' : ''}${metrics.trustScore.changePercentage}%`}
-        description="Experience, Expertise, Authority, Trust signals"
+        change={trust.changeText}
+        description="E-E-A-T signal strength"
+        trend={trust.trend}
       />
       <SnapshotCard
-        title="Non-Branded Coverage"
+        title="Keyword Coverage"
         value={metrics.keywordCoverage.value}
-        change={`${metrics.keywordCoverage.changePercentage > 0 ? '+' : ''}${metrics.keywordCoverage.changePercentage}%`}
-        description="Visibility in intent-driven, non-branded queries"
+        change={keyword.changeText}
+        description="Target keyword alignment"
+        trend={keyword.trend}
       />
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-sm font-medium">Last Audit</CardTitle>
-          <CardDescription className="text-xs">Most recent data refresh</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
-            {new Date(metrics.lastAuditTimestamp).toLocaleDateString()}
-          </div>
-          <div className="text-sm text-muted-foreground mt-1">
-            {new Date(metrics.lastAuditTimestamp).toLocaleTimeString()}
-          </div>
-          <Badge variant="secondary" className="mt-3">Up to date</Badge>
-        </CardContent>
-      </Card>
     </div>
   );
 }
